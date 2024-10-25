@@ -24,7 +24,7 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+   background: linear-gradient(to right, rgb(216, 220, 143), pink); /* Градиент от желтого к розовому */
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -66,3 +66,4 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+

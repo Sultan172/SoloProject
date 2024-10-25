@@ -1,0 +1,27 @@
+.custom-navbar {
+  background-color: rgb(182, 227, 185); 
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between; /* Распределяем элементы по краям */
+  align-items: center; /* Вертикальное выравнивание по центру */
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #ffffff !important;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  margin-left: 15px;
+  color: #ffffff !important;
+}
+
+.nav-link:hover {
+  color: #adb5bd !important; 
+}
+
+/* Этот класс сдвигает "Регистрация" и "Логин" вправо */
+.ml-auto {
+  margin-left: auto;
+}

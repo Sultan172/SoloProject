@@ -1,0 +1,26 @@
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import './LoginPage.css';
+
+function LoginPage() {
+  return (
+    <div className="login-container">
+      <Form className="login-form">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email </Form.Label>
+          <Form.Control type="email" placeholder="Enter email" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Пороль </Form.Label>
+          <Form.Control type="password" placeholder="Password" />
+        </Form.Group>
+        <br />
+        <Button variant="primary" type="submit">
+          Войти
+        </Button>
+      </Form>
+    </div>
+  );
+}
+
+export default LoginPage;

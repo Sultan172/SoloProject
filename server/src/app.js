@@ -1,10 +1,10 @@
 require('dotenv').config();
-// const apiRouter = require('./routers/api.router');
+const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
-const express = require('express');
-const app = express();
 const cors = require('cors');
+const authRouter = require('./routes/authRouter');
+const app = express();
 
 // const { PORT } = process.env;
 
@@ -18,6 +18,7 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use('/api/v1', apiRouter);
 
+app.use('/api/auth', authRouter);
 // слушатель
+module.exports = app;

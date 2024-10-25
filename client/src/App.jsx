@@ -1,35 +1,71 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+// import axios from 'axios'
+// import MainPage from './components/pages/MainPage'
+import "./App.css";
+import axiosInstance, { setAccessToken } from './services/axiosInstance';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Layout from './components/Layout'
+import RegistrationPage from './components/pages/RegistrationPage'
+import LoginPage from "./components/pages/LoginPage";
+import MainPage from './components/pages/MainPage';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [user, setUser] = useState()
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+  useEffect(() => {
+    axiosInstance
+      .get('/tokens/refresh')
+      .then((res) => {
+        setUser(res.data.user);
+        setAccessToken(res.data.accessToken);
+      })
+      .catch(() => {
+        setUser(null);
+      });
+  }, []);
+
+  const registerHandler = async (e, FormData) => {
+    e.preventDefault();
+    const response = await axiosInstance.post(`${import.meta.env.VITE_API_STRAIGHT}/auth/signup`, FormData)
+    setUser(response.data.user)
+    setAccessToken(response.data.accessToken);
+  }
+
+  const loginHandler = async (e, formData) => {
+    e.preventDefault();
+    const response = await axiosInstance.post(`${import.meta.env.VITE_API_STRAIGHT}/auth/login`, formData);
+    setUser(response.data.user);
+    setAccessToken(response.data.accessToken);
+  };
+  const logoutHandler = async () => {
+    await axiosInstance.get('/auth/logout');
+    setUser(null);
+    setAccessToken('');
+  };
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout user={user} logoutHandler={logoutHandler}/>,
+      children: [
+        {
+          path: "/",
+          element: <MainPage />,
+        },
+        {
+          path: '/signup',
+          element: <RegistrationPage registerHandler={registerHandler}/>,
+        },
+        {
+          path: '/login',
+          element: <LoginPage loginHandler={loginHandler}/>,
+        },
+        
+      ],
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App
