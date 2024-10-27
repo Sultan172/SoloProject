@@ -12,7 +12,7 @@ function NavBar({ user, logoutHandler }) {
           <Nav.Link as={Link} to="/">
             Главная
           </Nav.Link>
-          <Nav.Link as={Link} to="/signupлщжлщжлщ">
+          <Nav.Link as={Link} to="/messages">
             Рецепты
           </Nav.Link>
         </Navbar.Collapse>

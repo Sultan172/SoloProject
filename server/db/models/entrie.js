@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   Entrie.init({
     title: DataTypes.STRING,
     body: DataTypes.TEXT,
+    img: DataTypes.STRING,
     userId: DataTypes.INTEGER
   }, {
     sequelize,

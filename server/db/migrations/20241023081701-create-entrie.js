@@ -18,6 +18,10 @@ module.exports = {
         allowNull: false,
         defaultValue: '',
       },
+      img: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,

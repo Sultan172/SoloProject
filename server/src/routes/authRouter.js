@@ -20,6 +20,7 @@ authRouter.post('/signup', async (req, res) => {
     const user = newUser.get();
     delete user.hashpass;
     const { refreshToken, accessToken } = generateTokens({ user });
+    console.log("🚀 ~ authRouter.post ~ user:", user)
     res
       .status(200)
       .cookie('refreshToken', refreshToken, cookieConfig)

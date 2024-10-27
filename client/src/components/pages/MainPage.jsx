@@ -1,6 +1,6 @@
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 
-export default function MainPage() {
+export default function MainPage({ user }) {
   return (
     <div>
 

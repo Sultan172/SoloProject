@@ -8,18 +8,21 @@ import Layout from './components/Layout'
 import RegistrationPage from './components/pages/RegistrationPage'
 import LoginPage from "./components/pages/LoginPage";
 import MainPage from './components/pages/MainPage';
+import MessagesPage from './components/pages/MessagesPage'
 
 function App() {
   const [user, setUser] = useState()
+  console.log("🚀 ~ App ~ user:", user)
 
   useEffect(() => {
     axiosInstance
-      .get('/tokens/refresh')
+      .get(`${import.meta.env.VITE_API_STRAIGHT}/tokens/refresh`)
       .then((res) => {
         setUser(res.data.user);
         setAccessToken(res.data.accessToken);
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error,'error')
         setUser(null);
       });
   }, []);
@@ -50,7 +53,11 @@ function App() {
       children: [
         {
           path: "/",
-          element: <MainPage />,
+          element: <MainPage user={user} />,
+        },
+        {
+          path: '/messages',
+          element: <MessagesPage user={user} />,
         },
         {
           path: '/signup',
